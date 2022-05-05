@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/lab3.css">
+        <script src="js/lab3.js"></script>
+    </head>
+    <body>
+        <div class="profile">
+            <div class="profile_chooser">
+                <input class="profile_chooser_number_input" type="number" value="0" onchange="changeProfile(this.parentElement.parentElement)">
+                <input class="profile_create_button disabled" type="button" value="стоворити" onclick="createProfile(this.parentElement.parentElement)">
+            </div>
+            <h1 class="profile_title">Особова справа</h1>
+            <h3 class="profile_id">№12345</h3>
+            <div class="profile_presonal_info">
+                <img class="profile_img" onerror="this.src='/src/calibrate.jpg'"><div class="profile_name_and_work">
+                    <h2 class="profile_name">Призвіще Ім'я</h2>
+                    <h3 class="profile_work_name">Професія</h3>
+                    <form class="profile_change_image_form" action="/api/set_profile_image" method="post" enctype="multipart/form-data">
+                        <input class="profile_post_id_param" type="hidden" name="profile_id" value=""/>
+                        <input type="file" name="profile_image">
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+            <from class="profile_entry_creation">
+                <input type="text" name="" id="">
+                <button type="submit" value="">додати запис</button>
+            </from>
+            <div class="profile_register">
+                
+            </div>
+        </div>
+    </body>
+</html>

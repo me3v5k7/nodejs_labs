@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "id": "0",
+            "name": "Test Name",
+            "proffesion": "Test Prof",
+            "image_url": "",
+            "entries": [
+                {
+                    "date": "11.11.2011",
+                    "text": "this is a text"
+                }
+            ]
+        },
+        {
+            "id": "1",
+            "name": "",
+            "proffesion": "",
+            "image_url": "",
+            "entries": [
+                {
+                    "date": "12.09.2005",
+                    "text": "test 123123123"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+}
+
+.profile{
+    display: flex;
+    flex-flow: column;
+    width: 400px;
+    height: 600px;
+    background: lemonchiffon;
+}
+
+.profile_chooser{
+    text-align: center;
+}
+
+.profile_title, .profile_id {
+    width: 100%;
+    text-align: center;
+}
+
+.profile_presonal_info {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+    height: 120px;
+}
+
+.profile_img{
+    width: 100px;
+    height: 120px;
+    background: white;
+}
+
+.profile_name_and_work{
+    width: calc(100% - 100px);
+    display: inline-block;
+    vertical-align: top;
+}
+
+.profile_name, .profile_work_name {
+    width: 100%;
+    text-align: center;
+}
+
+.profile_register{
+    flex: 1 1 auto;
+    margin: auto;
+    width: calc(100% - 20px);
+    background: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.profile_change_image_form {
+    margin-top: 10px;
+    width: auto;
+    text-align: center;
+}
+.disabled {
+    pointer-events: none;
+    
+    background-color: rgba(239, 239, 239, 0.3);
+    color: rgba(16, 16, 16, 0.3);
+    border-color: rgba(118, 118, 118, 0.3);
+}
+
+.profile_regiter_entry {
+    width: 100%;
+    background: rgb(243, 233, 233);
+}
+
+.profile_regiter_entry_date {
+    width: 100%;
+    text-align: center;
+}
+
+.profile_entry_creation {
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+.profile_entry_creation > input {
+    flex: 1;
+    margin-right: 10px;
+}

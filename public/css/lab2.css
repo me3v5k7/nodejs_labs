@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.freecreatives.com%2Fwp-content%2Fuploads%2F2016%2F04%2FAbstract-Blue-Web-Background.jpg&f=1&nofb=1") no-repeat center center fixed;
+    background-size: cover;
+}
+
+#calculator_body {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    background: #ff0000;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px black;
+}
+
+#calculator_top_bar {
+    width: 100%;
+    height: 30px;
+    background: green;
+}
+
+#calculator_top_bar > button {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 3px;
+    top: 3px;
+}
+
+#calculator_screen {
+    width: 280px;
+    height: 100px;
+    background: blue;
+    border-radius: 15px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#calculator_numpad {
+    position: absolute;
+    width: 280px;
+    background: yellow;
+    left: 10px;
+    top: 150px;
+    bottom: 10px;
+}
+
+.grid_container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid_item {
+    font-size: 2em;
+    background-color: white;
+}
+
+.grid_item:hover {
+    background-color: rgb(212, 212, 212);
+}
+
+.grid_item:active {
+    background-color: rgb(163, 150, 236);
+}
+
+#calculator_history {
+    position: absolute;
+    background: aquamarine;
+    left: 300px;
+    top: 40px;
+    width: 390px;
+    bottom: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.calculator_screen_text {
+    color: #fff;
+    width: calc(100% - 20px);
+    text-align: right;
+    margin: auto;
+}
+
+#calculator_operated_number {
+    font-size: 1.6em;
+    height: 1em;
+}
+
+#calculator_operator {
+    font-size: 1.6em;
+    height: 1em;
+}
+
+#calculator_current_number {
+    font-size: 2.7em;
+    height: 1em;
+}
+
+.calculator_history_cell {
+    color: white;
+    display: flex;
+    width: 100%;
+    width: 100%;
+    height: calc((100% - 2px) / 8);
+    background: rgb(90, 90, 90);
+    border-bottom: 2px solid black;
+    align-items: center;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }

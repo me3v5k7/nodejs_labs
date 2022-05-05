@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="css/lab2.css">
+        <script src="js/lab2.js"></script>
+    </head>
+    <body>
+        <div id="calculator_body">
+            <div id="calculator_top_bar">
+                <label class="noselect">Calculator</label>
+                <button class="noselect" id="calculator_expand_button">&#62;</button>
+            </div>
+            <div id="calculator_screen">
+                <p class="calculator_screen_text" id="calculator_operated_number"></p>
+                <p class="calculator_screen_text" id="calculator_operator"></p>
+                <p class="calculator_screen_text" id="calculator_current_number"></p>
+            </div>
+            <div id="calculator_numpad">
+                <div class="grid_container">
+                    <button class="grid_item" onclick="eraseCurrentNumber()">&#60;=</button>
+                    <button class="grid_item" onclick="clearScreen()">C</button>
+                    <button class="grid_item" onclick="setOperator(4)">x^y</button>
+                    <button class="grid_item" onclick="setOperator(3)">/</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(7)">7</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(8)">8</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(9)">9</button>
+                    <button class="grid_item" onclick="setOperator(2)">*</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(4)">4</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(5)">5</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(6)">6</button>
+                    <button class="grid_item" onclick="setOperator(1)">-</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(1)">1</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(2)">2</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(3)">3</button>
+                    <button class="grid_item" onclick="setOperator(0)">+</button>
+                    <button class="grid_item" onclick="toggleSign()">+/-</button>
+                    <button class="grid_item" onclick="appendCurrentNumber(0)">0</button>
+                    <button class="grid_item" onclick="addComa()">,</button>
+                    <button class="grid_item" onclick="compute()">=</button>
+                  </div>
+            </div>
+            <div id="calculator_history">
+                <!-- <div onclick="loadFromHistory(2)" class="calculator_history_cell">1 + 1 = 2</div> -->
+            </div>
+        </div>
+    </body>
+</html>
