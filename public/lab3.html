@@ -7,26 +7,48 @@
     </head>
     <body>
         <div class="profile">
-            <div class="profile_chooser">
-                <input class="profile_chooser_number_input" type="number" value="0" onchange="changeProfile(this.parentElement.parentElement)">
-                <input class="profile_create_button disabled" type="button" value="стоворити" onclick="createProfile(this.parentElement.parentElement)">
+            <div class="profile_editor hidden">
+                
+                <h3>Змінити фотографію</h3>
+                <form class="profile_change_image_form" action="/api/set_profile_image" method="post" enctype="multipart/form-data">
+                    <input class="profile_post_id_param" type="hidden" name="profile_id" value=""/>
+                    <input type="file" name="profile_image">
+                    <input type="submit">
+                </form>
+                <h3>Змінити ім'я</h3>
+                <form class="profile_change_name_form" action="/api/set_profile_name" method="post" enctype="application/x-www-form-urlencoded">
+                    <input class="profile_post_id_param" type="hidden" name="profile_id" value=""/>
+                    <input type="text" name="profile_name">
+                    <input type="submit">
+                </form>
+                <h3>Змінити професію</h3>
+                <form class="profile_change_work_name_form" action="/api/set_profile_work_name" method="post" enctype="application/x-www-form-urlencoded">
+                    <input class="profile_post_id_param" type="hidden" name="profile_id" value=""/>
+                    <input type="text" name="profile_work_name">
+                    <input type="submit">
+                </form>
+                <button style="margin-top: 10px;" onclick="editProfile(this.parentElement.parentElement)">Завершити редрагування</button>
             </div>
-            <h1 class="profile_title">Особова справа</h1>
-            <h3 class="profile_id">№12345</h3>
+            <div class="profile_chooser">
+                <div class="dropdown">
+                    <button class="dropbtn">Особові справи</button>
+                    <div class="dropdown-content">
+                    </div>
+                </div>
+                <input class="profile_create_button" type="button" value="стоворити" onclick="createProfile(this.parentElement.parentElement)">
+                <input class="profile_create_button" type="button" value="редрагувати" onclick="editProfile(this.parentElement.parentElement)">
+            </div>
+            <h1 class="profile_title">Особова справа №12345</h1>
             <div class="profile_presonal_info">
                 <img class="profile_img" onerror="this.src='/src/calibrate.jpg'"><div class="profile_name_and_work">
                     <h2 class="profile_name">Призвіще Ім'я</h2>
                     <h3 class="profile_work_name">Професія</h3>
-                    <form class="profile_change_image_form" action="/api/set_profile_image" method="post" enctype="multipart/form-data">
-                        <input class="profile_post_id_param" type="hidden" name="profile_id" value=""/>
-                        <input type="file" name="profile_image">
-                        <input type="submit">
-                    </form>
+                    
                 </div>
             </div>
             <from class="profile_entry_creation">
-                <input type="text" name="" id="">
-                <button type="submit" value="">додати запис</button>
+                <input class="profile_entry_creation_text" type="text" name="" id="">
+                <button onclick="addRegisterEntry(this.parentElement.parentElement)">додати запис</button>
             </from>
             <div class="profile_register">
                 

@@ -47,10 +47,10 @@ app.get("/hello", function(req, res) {
 });
 
 app.post("/api/get_profile_info", function(req, res){
-    let json_object = JSON.parse(loadData(json_db_filepath));
-    let responce_key = searchFirstResultJSON(json_object.users, "id", req.body.id);
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    let responce_key = searchFirstResultJSON(json_db.users, "id", req.body.id);
     if (responce_key){
-        res.send(json_object.users[responce_key]);
+        res.send(json_db.users[responce_key]);
     }
     else {
         res.send(`{"responce" : "false"}`);
@@ -65,11 +65,11 @@ app.post("/api/set_profile_image", function(req, res){
         else if(err) {  
             return res.end("Error uploading file.");  
         }
-        let json_object = JSON.parse(loadData(json_db_filepath));
-        let key = searchFirstResultJSON(json_object.users, "id", req.body.profile_id);
+        let json_db = JSON.parse(loadData(json_db_filepath));
+        let key = searchFirstResultJSON(json_db.users, "id", req.body.profile_id);
 
-        if (json_object.users[key].image_url !== ""){
-            let filepath = __dirname + ("/public" + json_object.users[key].image_url)
+        if (json_db.users[key].image_url !== ""){
+            let filepath = __dirname + ("/public" + json_db.users[key].image_url)
             checkFileExists(filepath).then(function(bool) {
                 if (bool){
                     fs.unlink(filepath, function(err){
@@ -83,15 +83,33 @@ app.post("/api/set_profile_image", function(req, res){
         }
 
         if(req.file){
-            json_object.users[key].image_url = "/src/profile_images/" + req.file.filename;
+            json_db.users[key].image_url = "/src/profile_images/" + req.file.filename;
             
         }
         else {
-            json_object.users[key].image_url = "";
+            json_db.users[key].image_url = "";
         }
-        saveData(json_db_filepath, JSON.stringify(json_object));
+        saveData(json_db_filepath, JSON.stringify(json_db));
         res.end(`{"result" : "sucsess"}`);
     });
+});
+
+app.post("/api/set_profile_name", function(req, res){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    let key = searchFirstResultJSON(json_db.users, "id", req.body.profile_id);
+    json_db.users[key].name = req.body.profile_name;
+
+    saveData(json_db_filepath, JSON.stringify(json_db));
+    res.send(`{"result" : "sucsess"}`);
+});
+
+app.post("/api/set_profile_work_name", function(req, res){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    let key = searchFirstResultJSON(json_db.users, "id", req.body.profile_id);
+    json_db.users[key].proffesion = req.body.profile_work_name;
+
+    saveData(json_db_filepath, JSON.stringify(json_db));
+    res.send(`{"result" : "sucsess"}`);
 });
 
 app.post("/api/create_profile", function(req, res){
@@ -104,6 +122,30 @@ app.post("/api/create_profile", function(req, res){
     res.send(JSON.stringify({"new_id" : new_id.toString()}));
 });
 
+app.post("/api/get_profiles", function(req, res){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+
+    res.send(JSON.stringify(json_db.users));
+});
+
+app.post("/api/delete_register_entry", function(req, res){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    json_db.users[req.body.profile_id].entries.pop([parseInt(req.body.entry_id)])
+    
+    saveData(json_db_filepath, JSON.stringify(json_db));
+    res.send();
+});
+
+app.post("/api/add_register_entry", function(req, res){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    let current_date = new Date();
+    json_db.users[req.body.profile_id].entries.push({"date" : `${current_date.getDate()}.${current_date.getMonth() + 1}.${current_date.getFullYear()}`, "text" : req.body.text});
+    
+    saveData(json_db_filepath, JSON.stringify(json_db));
+    res.send();
+});
+
+//data utilities
 const loadData = function(path){
     try {
          return fs.readFileSync(path, 'utf8')
