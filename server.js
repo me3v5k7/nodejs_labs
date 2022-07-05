@@ -57,6 +57,8 @@ app.post("/api/get_profile_info", function(req, res){
     }
 });
 
+
+
 app.post("/api/set_profile_image", function(req, res){
     profile_images_upload(req, res, function(err) {
         if (err instanceof multer.MulterError) {
@@ -94,6 +96,12 @@ app.post("/api/set_profile_image", function(req, res){
     });
 });
 
+function changeProfileImage(profile_id, image_url){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    json_db.users[profile_id].image_url = "/src/profile_images/" + image_url;
+    saveData(json_db_filepath, JSON.stringify(json_db));
+}
+
 app.post("/api/set_profile_name", function(req, res){
     let json_db = JSON.parse(loadData(json_db_filepath));
     let key = searchFirstResultJSON(json_db.users, "id", req.body.profile_id);
@@ -102,6 +110,12 @@ app.post("/api/set_profile_name", function(req, res){
     saveData(json_db_filepath, JSON.stringify(json_db));
     res.send(`{"result" : "sucsess"}`);
 });
+
+function changeProfileName(profile_id, new_name){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    json_db.users[profile_id].name = new_name;
+    saveData(json_db_filepath, JSON.stringify(json_db));
+}
 
 app.post("/api/set_profile_work_name", function(req, res){
     let json_db = JSON.parse(loadData(json_db_filepath));
@@ -112,6 +126,12 @@ app.post("/api/set_profile_work_name", function(req, res){
     res.send(`{"result" : "sucsess"}`);
 });
 
+function changeProfileProffesion(profile_id, new_name){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    json_db.users[profile_id].proffesion = new_name;
+    saveData(json_db_filepath, JSON.stringify(json_db));
+}
+
 app.post("/api/create_profile", function(req, res){
     let json_profile_template = {"id":"","name":"None","proffesion":"None","image_url":"","entries":[/* entries_here */]};
     let json_db = JSON.parse(loadData(json_db_filepath));
@@ -121,6 +141,22 @@ app.post("/api/create_profile", function(req, res){
     saveData(json_db_filepath, JSON.stringify(json_db));
     res.send(JSON.stringify({"new_id" : new_id.toString()}));
 });
+
+function createProfile(){
+    let json_profile_template = {"id":"","name":"None","proffesion":"None","image_url":"","entries":[/* entries_here */]};
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    let new_id = searchMaxIntResultJSON(json_db.users, "id") + 1;
+    json_profile_template.id = new_id.toString()
+    json_db.users.push(json_profile_template);
+    saveData(json_db_filepath, JSON.stringify(json_db));
+    return new_id;
+}
+
+function deleteProfile(id_to_delete){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    json_db.users.pop(id_to_delete);
+    saveData(json_db_filepath, JSON.stringify(json_db));
+}
 
 app.post("/api/get_profiles", function(req, res){
     let json_db = JSON.parse(loadData(json_db_filepath));
@@ -136,6 +172,14 @@ app.post("/api/delete_register_entry", function(req, res){
     res.send();
 });
 
+function deleteRegisterEntry(profile_id, entry_id){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    json_db.users[profile_id].entries.pop([parseInt(entry_id)])
+    
+    saveData(json_db_filepath, JSON.stringify(json_db));
+}
+
+
 app.post("/api/add_register_entry", function(req, res){
     let json_db = JSON.parse(loadData(json_db_filepath));
     let current_date = new Date();
@@ -144,6 +188,14 @@ app.post("/api/add_register_entry", function(req, res){
     saveData(json_db_filepath, JSON.stringify(json_db));
     res.send();
 });
+
+function addRegisterEntry(profile_id, entry_text){
+    let json_db = JSON.parse(loadData(json_db_filepath));
+    let current_date = new Date();
+    json_db.users[profile_id].entries.push({"date" : `${current_date.getDate()}.${current_date.getMonth() + 1}.${current_date.getFullYear()}`, "text" : entry_text});
+    
+    saveData(json_db_filepath, JSON.stringify(json_db));
+}
 
 //data utilities
 const loadData = function(path){
